@@ -4,6 +4,7 @@ import styles from './header.css';
 
 function HeaderComponent() {
   console.log(styles, '\n', styles.example);
+  
   return (
     <header>
       <h1 className={styles.example}>Reddit Hello</h1>
