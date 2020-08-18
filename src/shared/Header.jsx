@@ -2,7 +2,7 @@ import * as React from 'react';
 import styles from './header.css';
 
 export default function Header() {
-  console.log(styles, '\n', styles.exaple);
+  console.log(styles, styles.exaple);
 
   return (
     <header>

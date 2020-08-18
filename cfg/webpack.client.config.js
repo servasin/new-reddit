@@ -21,7 +21,6 @@ module.exports = {
   },
   module: {
     rules: [
-      'style-loader',
       {
         test: /\.[js]sx?$/,
         use: ['ts-loader'],
@@ -30,13 +29,14 @@ module.exports = {
       {
         test: /\.css$/,
         use: [
+          'style-loader', 
           {
             loader: 'css-loader',
             options: {
               modules: {
                 mode: 'local',
                 localIdentName: '[name]__[local]--[hash:base64:5]',
-              },
+              }
             }
           }
         ],
