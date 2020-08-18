@@ -48,7 +48,7 @@ compiler.run((err) => {
       path.resolve(__dirname, '../dist/server'),
       path.resolve(__dirname, '../dist/client'),
     ],
-    delay: 200,
+    delay: 5000,
   })
 
 });
