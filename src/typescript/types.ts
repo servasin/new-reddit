@@ -54,4 +54,81 @@ const [val1, val2] = myTuple;
 
 // const [ state, setState ] = useState();
 
+// Object
+type myObjType = { a: number, b: string };
+
+const myObj: { a: number, b: string } = { a: 1, b: '2' };
+
+interface MyFirstInterface {
+  readonly a: number;
+  b: string;
+  c?: number[];
+  e: number | undefined;
+}
+
+const myObj2: MyFirstInterface = {
+  a: 1,
+  b: 'ffdf',
+  e: undefined,
+}
+
+if (myObj2.c) {
+  const value = myObj2.c;
+}
+
+const ApiAnswer: IndexInterface = { key: 'frdfg', key2: 'efdf' };
+
+const val3 = ApiAnswer.randomKey
+
+interface IndexInterface {
+  [N: string]: string;
+}
+
+// Function
+
+enum Methods {
+  add,
+  sub,
+  div,
+}
+
+// calculate('add', 5, 5) // -> 10
+function calculate(method: Methods, left: number, right: number): number {
+  switch (method) {
+    case Methods.add: return left + right;
+    case Methods.sub: return left - right;
+    case Methods.div: return left / right;
+  }
+}
+
+const sum = calculate(Methods.add, 2, 2);
+
+const arrowFn: TypeFn = () => 2;
+
+type TypeFn = () => number;
+
+interface FnInterface {
+  (a: string): void;
+}
+
+
 type StrangeTsTypes = any | unknown | never;
+
+const some: any = undefined;
+some.reduce() // нет метода
+
+const un: unknown = 'd';
+// un.concat() - у unknow нет методов
+
+if (typeof un === 'string') {
+  un.concat();
+}
+
+function voidFn(): void {}
+const voidExample = voidFn(); // -> void
+
+function neverFn(): never {
+  throw new Error('Exaption'); // функция не дойдет до конца
+}
+
+const neverExample = neverFn();
