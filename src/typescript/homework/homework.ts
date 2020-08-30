@@ -65,3 +65,17 @@ const Example2: IExample2 = {
     }
   ]
 }
+
+
+// 3. Reduce
+
+const myArray2: MyArray<number> = [1, 2, 3];
+
+interface MyArray<T> {
+  [N: number]: T
+
+  map<U>(fn: (el: T, index: number, array: MyArray<T>) => U): MyArray<U>
+  reduce<U>(fn: (prev: U, curr: T, index: number, array: MyArray<T>) => U, initial: U): U;
+}
+
+const total = myArray2.reduce((acc, val) => acc + val, 0)
