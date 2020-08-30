@@ -10,22 +10,58 @@ type MyArrayType =  Array<string | number>
 
 interface IMyObject {
   howIDoIt: string;
-  simeArray: Array<string | number>
+  someArray: Array<string | number>
 }
 
 interface IMyHometask {
   howIDoIt: string;
-  simeArray: (string| number)[];
-  withData: IMyObject[];
+  someArray: (string| number)[];
+  withData?: IMyHometask[];
 }
 
 const MyHometask : IMyHometask = {
-  howIDoIt: "I Do It Wel",
-  simeArray: ["string one", "string two", 42],
+  howIDoIt: "I Do It Well",
+  someArray: ["string one", "string two", 42],
   withData: [
     { 
       howIDoIt: "I Do It Wel", 
-      simeArray: ["string one", 23] 
-    }
+      someArray: ["string one", 23],
+      withData: [
+        { 
+          howIDoIt: "I Do It Wel", 
+          someArray: ["string one", 23],
+        }
+      ]
+    },
+    { 
+      howIDoIt: "I Do It Wel", 
+      someArray: ["string one", 23],
+    },
   ],
+}
+
+//////
+interface IExample2 {
+  howIDoIt: string;
+  someArray: Array<string | number>;
+  withData?: Array<IExample2> | IExample2
+}
+
+const Example2: IExample2 = {
+  howIDoIt: "I Do It Well",
+  someArray: ["string one", "string two", 42],
+  withData: [
+    {
+      howIDoIt: "I Do It Well",
+      someArray: ["string one", 23],
+    },
+    {
+      howIDoIt: "I Do It Deep",
+      someArray: [1,5,6,8],
+      withData: {
+        howIDoIt: "I am child",
+        someArray: []
+      }
+    }
+  ]
 }
