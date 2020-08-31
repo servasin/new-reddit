@@ -79,3 +79,24 @@ interface MyArray<T> {
 }
 
 const total = myArray2.reduce((acc, val) => acc + val, 0)
+
+// 4. Maped Types
+interface IHomeTask {
+  data: string;
+  numbericData: number;
+  date: Date;
+  externalData: {
+    basis: number;
+    value: string;
+  }
+}
+
+const homeTask: OwnPartial<IHomeTask> = {
+  externalData: {
+    value: 'win'
+  }
+}
+
+type OwnPartial<T> = {
+  [N in keyof T]?: T[N] extends object ? OwnPartial<T[N]> : T[N]
+}
