@@ -8,43 +8,36 @@ function HomeComponent(props: { firstProp: string }) {
   )
 }
 
+function GreetingComponent(props: { phrase: string,  name: string }) {
+  return (
+    <div>
+      `{ props.phrase }, my name { props.name }`
+    </div>
+  )
+}
+
 interface IProps {
   firstProp: string
 }
 
-type t = GetParamsyy<typeof HomeComponent>;
+type TMyType<T> = T extends React.ComponentType<infer P> ? P : never;
 
-type TMyType<T> = 
-  T extends React.Component<infer P>
-  ? P
-  : T
-type GetParams<T extends React.Component> = T extends React.Component<infer P> ? P : never
+type t = TMyType<typeof HomeComponent>;
+type t2 = TMyType<typeof GreetingComponent>;
 
 
-type TGetJSXPropsProp<T> = {
-  [N in keyof T]: T[N]
+
+type TDivElement = JSX.IntrinsicElements['div']
+type TGetJSXPropsProp<T extends keyof JSX.IntrinsicElements> = {
+  [N in keyof T]: T[N] extends keyof React.HTMLAttributes<T> /* окуда мне доставать HTML аттрибуты,
+   чтобы проверить T[N] входит в их число или нет */
 }
 
 type TDivProps = TGetJSXPropsProp<'div'>
 
 const props: TDivProps = {
-  // some: '1233' // throw error потому что не содержится в атрибутах div
+  some: '1233', // throw error потому что не содержится в атрибутах div
   className: 'handler' // не выкидывает ошибку так как валидно для div элемента
 }
 
-/*
-type TMyType<T> = {
-  [N in keyof T]: T[N] extends React.Component ? TMyType<T[N]> : T[N]
-}
-
-type test1 = TMyType<typeof HomeComponent>;
-type test2 = TMyType<IProps>;
-
-const c: test1 = HomeComponent
-
-type TPropType<T> = T extends React.Component<infer E> ? E : T
-
-// ???
-type test3 = TPropType<typeof HomeComponent>;
-*/
-
+console.log(props)
