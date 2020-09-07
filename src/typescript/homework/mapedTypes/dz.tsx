@@ -28,9 +28,12 @@ type t2 = TMyType<typeof GreetingComponent>;
 
 
 type TDivElement = JSX.IntrinsicElements['div']
+// type TGetJSXPropsProp<T extends keyof JSX.IntrinsicElements> = {
+//   [N in keyof T]: T[N]  extends keyof TDivElement
+// }
+
 type TGetJSXPropsProp<T extends keyof JSX.IntrinsicElements> = {
-  [N in keyof T]: T[N] extends keyof React.HTMLAttributes<T> ? T[N] : never/* окуда мне доставать HTML аттрибуты,
-   чтобы проверить T[N] входит в их число или нет */
+  [N in keyof T]: T[N]  extends keyof React.DetailedHTMLProps<React.HTMLAttributes<TDivElement>, TDivElement>
 }
 
 type TDivProps = TGetJSXPropsProp<'div'>
