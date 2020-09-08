@@ -32,15 +32,15 @@ type TDivElement = JSX.IntrinsicElements['div']
 //   [N in keyof T]: T[N]  extends keyof TDivElement
 // }
 
-type TGetJSXPropsProp<T extends keyof JSX.IntrinsicElements> = {
-  [N in keyof T]: T[N]  extends keyof React.DetailedHTMLProps<React.HTMLAttributes<TDivElement>, TDivElement>
-}
+// type TGetJSXPropsProp<T extends keyof JSX.IntrinsicElements> = {
+//   [N in keyof T]: T[N]  extends keyof React.DetailedHTMLProps<React.HTMLAttributes<TDivElement>, TDivElement>
+// }
 
-type TDivProps = TGetJSXPropsProp<'div'>
+// type TDivProps = TGetJSXPropsProp<'div'>
 
-const props: TDivProps = {
-  some: '1233', // throw error потому что не содержится в атрибутах div
-  className: 'handler' // не выкидывает ошибку так как валидно для div элемента
-}
+// const props: TDivProps = {
+//   some: '1233', // throw error потому что не содержится в атрибутах div
+//   className: 'handler' // не выкидывает ошибку так как валидно для div элемента
+// }
 
-console.log(props)
+// console.log(props)
