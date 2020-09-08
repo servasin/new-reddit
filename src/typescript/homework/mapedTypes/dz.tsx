@@ -36,8 +36,8 @@ type t2 = TMyType<typeof GreetingComponent>;
 //   className: 'handler' // не выкидывает ошибку так как валидно для div элемента
 // }
 
-// Как мне написать "ИЛИ" в TypeScript?
-type filterHTMLAttr<T> = T extends keyof React.DOMAttributes<T> | React.ClassAttributes<T> ? never : T
+// Может так ? Незнаю
+type filterHTMLAttr<T> = T extends React.DOMAttributes<infer E> | React.ClassAttributes<infer E> ? E : T
 type TGetJSXPropsProp<tag> = tag extends keyof JSX.IntrinsicElements ? filterHTMLAttr<JSX.IntrinsicElements[tag]> : {};
 
 const propsInput1: TGetJSXPropsProp<'input'> = {
