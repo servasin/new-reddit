@@ -37,15 +37,33 @@ type t2 = TMyType<typeof GreetingComponent>;
 // }
 
 // Может так ? Незнаю
-type filterHTMLAttr<T> = T extends React.DOMAttributes<infer E> | React.ClassAttributes<infer E> ? E : T
-type TGetJSXPropsProp<tag> = tag extends keyof JSX.IntrinsicElements ? filterHTMLAttr<JSX.IntrinsicElements[tag]> : {};
+// type filterHTMLAttr<T> = T extends React.DOMAttributes<infer E> | React.ClassAttributes<infer E> ? E : T
+// type TGetJSXPropsProp<tag> = tag extends keyof JSX.IntrinsicElements ? filterHTMLAttr<JSX.IntrinsicElements[tag]> : {};
 
-const propsInput1: TGetJSXPropsProp<'input'> = {
-  required: true,
-  children: 'dsfdsf',
+// const propsInput1: TGetJSXPropsProp<'input'> = {
+//   required: true,
+//   children: 'dsfdsf',
+// };
+
+// const propsInput2: TGetJSXPropsProp<'input'> = {
+//   required: true,
+//   ref: 'asdsa',
+// };
+type InputType = JSX.IntrinsicElements['input']
+type TGetJSXPropsProp<T> = Omit<InputType, keyof React.DOMAttributes<InputType> | keyof React.ClassAttributes<InputType>>
+
+const mock: any = undefined // заглушка типа any, которая подойдет к любому типу (чтобы не создавать громоздкие обьекты для теста)
+
+const propsInput1: TGetJSXPropsProp<'input'> = { // ok
+    required: true, // ok - это свойство input
 };
 
-const propsInput2: TGetJSXPropsProp<'input'> = {
-  required: true,
-  ref: 'asdsa',
+const propsInput2: TGetJSXPropsProp<'input'> = { // error
+    required: true, // ok - это свойство input
+    children: mock, // error - это реакт свойство
+};
+
+const propsInput3: TGetJSXPropsProp<'input'> = { // error
+    required: true, // ok
+    ref: mock, // error - это реакт свойство
 };
